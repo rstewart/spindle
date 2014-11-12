@@ -9,6 +9,11 @@
   val ${cls.tstructName}: org.apache.thrift.protocol.TStruct = new org.apache.thrift.protocol.TStruct("${cls.name}")
 
 #for (field <- cls.fields)
+  val ${field.tfieldName}_ANNOTATIONS: java.util.Map[String, String] = new java.util.HashMap[String, String](){{
+#for (annotation <- field.annotations.toSeq)
+    put("${annotation._1}", "${annotation._2}");
+#end
+  }};
   val ${field.tfieldName}: org.apache.thrift.protocol.TField =
     new com.foursquare.common.thrift.base.EnhancedTField(
       "${field.wireName}",
@@ -24,7 +29,8 @@
 #end
         rv
 #end
-      }
+      },
+      ${field.tfieldName}_ANNOTATIONS
     )
 #end
 

@@ -23,7 +23,7 @@
       name = "${field.wireName}",
       longName = "${field.name}",
       id = ${field.identifier},
-      annotations = Map(${field.annotations.toSeq.map(at => "\"%s\" -> \"%s\"".format(at._1, at._2)).mkString(", ")}),
+      annotations = scala.collection.JavaConverters.mapAsScalaMapConverter(${field.tfieldName}_ANNOTATIONS).asScala.toMap,
       owner = this,
       getter = _.${field.name}Option,
       setterRaw = (r: com.foursquare.spindle.MutableRecord[${cls.name}], v: ${field.renderType.text}) => { r.asInstanceOf[Raw${cls.name}].${field.escapedName}_=(v) },

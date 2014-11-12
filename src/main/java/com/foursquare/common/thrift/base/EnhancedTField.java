@@ -14,14 +14,17 @@ import org.apache.thrift.protocol.TField;
  */
 public class EnhancedTField extends TField {
   public final Map<String, String> enhancedTypes;
+  public final Map<String, String> annotations;
 
   public EnhancedTField() {
     super();
     this.enhancedTypes = new HashMap<String, String>();
+    this.annotations = new HashMap<String, String>();
   }
 
-  public EnhancedTField(String n, byte t, short i, Map<String, String> enhancedTypes) {
+  public EnhancedTField(String n, byte t, short i, Map<String, String> enhancedTypes, Map<String, String> annotations) {
     super(n, t, i);
     this.enhancedTypes = enhancedTypes;
+    this.annotations = annotations;
   }
 }
