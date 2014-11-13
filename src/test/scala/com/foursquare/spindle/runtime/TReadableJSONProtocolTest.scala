@@ -5,7 +5,7 @@ package com.foursquare.spindle.runtime.test
 import com.foursquare.common.thrift.json.TReadableJSONProtocol
 import com.foursquare.spindle.{Record, MetaRecord}
 import com.foursquare.spindle.test.JsonPrettyPrinter
-import com.foursquare.spindle.test.gen.{BinaryStruct, TestStruct, TestStructNoUnknownFieldsTracking}
+import com.foursquare.spindle.test.gen.{BinaryStruct, TestStruct, TestStructNoUnknownFieldsTracking, TestStructWithFieldNameAnnotations}
 import java.nio.ByteBuffer
 import org.apache.thrift.{TBase, TDeserializer}
 import org.apache.thrift.transport.{TMemoryBuffer, TMemoryInputTransport}
@@ -82,5 +82,21 @@ class TReadableJSONProtocolTest {
     val oprot = protocolFactory.getProtocol(trans)
     rec.write(oprot)
     JsonPrettyPrinter.prettify(trans.toString("UTF8"))
+  }
+
+  @Test
+  def testFieldNameAnnotationsSerialize {
+    val t1 = TestStructWithFieldNameAnnotations.newBuilder
+      .string1("val1")
+      .string2("val2")
+      .string3("val3")
+      .result
+
+    val js1 = writeJson(t1, false)
+    assertEquals(js1, """{
+  "str1Wire" : "val1",
+  "str2Json" : "val2",
+  "str3Json" : "val3"
+}""")
   }
 }

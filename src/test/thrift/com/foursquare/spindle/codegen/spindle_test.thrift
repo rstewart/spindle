@@ -612,6 +612,12 @@ struct TestStructIdentifierOverThousand {
   1001: optional bool aBool
 }
 
+struct TestStructWithFieldNameAnnotations {
+  1: optional string string1 (wire_name="str1Wire")
+  2: optional string string2 (json_name="str2Json")
+  3: optional string string3 (wire_name="str3Wire", json_name="str3Json")
+}
+
 exception TestFirstException {
   1: i32 value
 }
