@@ -42,6 +42,7 @@ import com.foursquare.common.thrift.base.SerializeDatesAsSeconds;
 import com.foursquare.common.thrift.base.TTransportInputStream;
 import com.foursquare.common.thrift.base.TTransportOutputStream;
 
+// TODO(rstewart): Make use of json_name annotations
 
 /**
  * Thrift protocol to read and write (optionally pretty) JSON.
